@@ -7,9 +7,9 @@ const isEmail = (val) => {
     }
   }
 
-module.exports = login = async (email, password) => {
+export const login = async (email, password) => {
     if(!isEmail(email) )
-    await axios.post([API_URL] + "/users/login", { email, password })
+    await axios.post("http://localhost:58872/api" + "/users/login", { email, password })
     .then(res => {
         console.log('ici', res)
         if(res.data.data.verification)
