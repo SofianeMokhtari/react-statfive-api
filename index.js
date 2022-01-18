@@ -1,4 +1,4 @@
-import axios from 'axios'
+const axios = require('axios');
 
 const isEmail = (val) => {
     let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -7,9 +7,9 @@ const isEmail = (val) => {
     }
   }
 
-export const login = async (email, password) => {
+  module.exports = async function login(email, password) {
     if(!isEmail(email) )
-    await axios.post("http://localhost:58872/api" + "/users/login", { email, password })
+    await axios.post("http://172.16.28.58:5001/api" + "/users/login", { email, password })
     .then(res => {
         console.log('ici', res)
         if(res.data.data.verification)
