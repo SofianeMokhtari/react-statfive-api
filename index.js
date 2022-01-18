@@ -22,3 +22,23 @@ const isEmail = (val) => {
           console.log(err)
       });
   };
+
+  module.exports = async function register(email, firstname, lastname, password, pass2) {
+    if(pass !== pass2)
+        return setError("Les mots de passe ne correspondent pas")
+    if(lastname.length < 2 || firstname < 2) 
+        return setError("Le prénom ou le nom est trop court")
+  if(!isEmail(email))
+    await axios.post(
+        "http://172.16.28.58:5001/api" + "/users/create",
+        {
+            email,
+            firstname,
+            lastname,
+            password
+          }
+      ).then(res => {return true})
+      .catch(err => {
+        return err
+      });
+  };
