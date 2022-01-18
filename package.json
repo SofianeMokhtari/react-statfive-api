@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "Api call function for ReactJS and ReactNative",
   "license": "MIT",
-  "repository": "mokhta_s/react-statfive-api",
+  "repository": "SofianeMokhtari/react-statfive-api",
   "main": "index.js",
   "keywords": [
     "react-statfive-api",
