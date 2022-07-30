@@ -6,6 +6,6 @@ export const httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use(function (config) {
-    const token = await AsyncStorage.getItem('token')
+    const token = AsyncStorage.getItem('token')
     config.headers['api-token'] =  token ? token : '';
 });
