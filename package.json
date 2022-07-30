@@ -1,10 +1,14 @@
 {
   "name": "@mokhta_s/react-statfive-api",
-  "version": "3.1.14",
+  "version": "3.1.15",
   "description": "Api call function for ReactJS and ReactNative",
   "license": "MIT",
   "repository": "SofianeMokhtari/react-statfive-api",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dist"
+  },
   "keywords": [
     "react-statfive-api",
     "npm",
@@ -12,6 +16,9 @@
     "mokhta_s"
   ],
   "dependencies": {
-    "axios": "^0.25.0"
+    "@react-native-async-storage/async-storage": "^1.17.7",
+    "axios": "^0.25.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
   }
 }
