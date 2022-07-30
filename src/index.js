@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         if(!isEmail(email)) {
             const result = axios.post(API_URL + "/users/login", { email, password })
             .then(res => {
-                AsyncStorage.setItem('userValue', 'testttestestest')
+                AsyncStorage.setItem('token', res.data.data.token)
                 return res.data
             }).catch((err) => {
                 return err.response

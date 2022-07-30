@@ -5,7 +5,7 @@ export const httpClient = axios.create({
     // baseURL: process.env.APP_API_BASE_URL,
 });
 
-// httpClient.interceptors.request.use(function (config) {
-//     const token = localStorage.getItem('token');
-//     config.headers['api-token'] =  token ? `Bearer ${token}` : '';
-// });
+httpClient.interceptors.request.use(function (config) {
+    const token = await AsyncStorage.getItem('token')
+    config.headers['api-token'] =  token ? token : '';
+});
