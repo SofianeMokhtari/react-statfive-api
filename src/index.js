@@ -167,7 +167,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           return err.response
         })
         return result
-      }?
+      },
       getAllUser: async function() {
         const result = await httpClient.get(`/users/all_user`)
         .then((res) => {

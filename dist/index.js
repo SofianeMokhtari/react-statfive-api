@@ -149,14 +149,15 @@ module.exports = {
     });
     return result;
   },
-  statMatchById: async function (idMatch) {
+  statMatchById: async function statMatchById(idMatch) {
     var result = await _axiosConfig.httpClient.get('/match/stat_match_by_id/' + idMatch).then(async function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
     });
     return result;
-  } ? getAllUser : async function () {
+  },
+  getAllUser: async function getAllUser() {
     var result = await _axiosConfig.httpClient.get('/users/all_user').then(function (res) {
       return res;
     }).catch(function (err) {
