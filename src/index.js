@@ -136,7 +136,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       },
       getMyTeam: async function(teamID) {
         let teamUrl = []
-        teamID && teamID.map((elm) => teamUrl.push(API_URL + `/team/${elm.value}`))
+        teamID && teamID.map((elm) => teamUrl.push("https://api.preprod.statfive.fr/api", `/team/${elm.value}`))
         return teamUrl
       },
       verification: async function(otp) {
