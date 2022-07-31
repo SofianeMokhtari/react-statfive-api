@@ -148,5 +148,13 @@ module.exports = {
       return err.response;
     });
     return result;
+  },
+  statMatchById: async function statMatchById(idMatch) {
+    var result = await _axiosConfig.httpClient.get('/match/stat_match_by_id/' + id).then(async function (res) {
+      return res;
+    }).catch(function (err) {
+      return err.response;
+    });
+    return result;
   }
 };
