@@ -61,8 +61,8 @@ module.exports = {
   login: login,
   register: register,
   getAverageGoal: getAverageGoal,
-  getAllTeam: async function getAllTeam(API_URL) {
-    var result = await axios.get(API_URL + '/team/all_team').then(function (res) {
+  getAllTeam: async function getAllTeam() {
+    var result = await _axiosConfig.httpClient.get('/team/all_team').then(function (res) {
       var arrayObj = res.data.data;
       arrayObj = arrayObj.map(function (item) {
         return {
@@ -77,7 +77,7 @@ module.exports = {
     });
     return result;
   },
-  addVideo: async function addVideo(API_URL, mp4, teamOne, teamTwo, token) {
+  addVideo: async function addVideo(mp4, teamOne, teamTwo) {
     var bodyFormData = new FormData();
     bodyFormData.append('video', mp4);
     bodyFormData.append('team_one', teamOne);
@@ -85,69 +85,64 @@ module.exports = {
 
     var headers = {
       'Content-Type': 'multipart/form-data',
-      "Access-Control-Allow-Origin": "*",
-      'api-token': token
+      "Access-Control-Allow-Origin": "*"
     };
-    var result = await axios.post(API_URL + '/match', bodyFormData, { headers: headers }).then(function (res) {
+    var result = await _axiosConfig.httpClient.post('/match', bodyFormData, { headers: headers }).then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
     });
     return result;
   },
-  createTeam: async function createTeam(API_URL, teamName, arrayTeam) {
-    var result = await axios.post(API_URL + '/team/create_team', [{ name: teamName, player: arrayTeam }]).then(function (res) {
+  createTeam: async function createTeam(teamName, arrayTeam) {
+    var result = await _axiosConfig.httpClient.post('/team/create_team', [{ name: teamName, player: arrayTeam }]).then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
     });
     return result;
   },
-  matchListHistoric: async function matchListHistoric(API_URL) {
-    var result = await axios.get(API_URL + '/match/all_match').then(function (res) {
+  matchListHistoric: async function matchListHistoric() {
+    var result = await _axiosConfig.httpClient.get('/match/all_match').then(function (res) {
       return res.data.data;
     }).catch(function (err) {
       return err.response;
     });
     return result;
   },
-  updateProfil: async function updateProfil(API_URL, idUser, description, post) {
-    var result = await axios.put(API_URL + ('/users/' + idUser), { description: description, post: post }).then(function (res) {
+  updateProfil: async function updateProfil(idUser, description, post) {
+    var result = await _axiosConfig.httpClient.put('/users/' + idUser, { description: description, post: post }).then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
     });
     return result;
   },
-  getTeam: async function getTeam(API_URL) {
-    var result = await axios.get(API_URL + '/team/all_team').then(function (res) {
+  getTeam: async function getTeam() {
+    var result = await _axiosConfig.httpClient.get('/team/all_team').then(function (res) {
       return res.data.data;
     }).catch(function (err) {
       return err.response;
     });
     return result;
   },
-  getMyTeam: async function getMyTeam(API_URL, teamID, userID) {
+  getMyTeam: async function getMyTeam(teamID) {
     var teamUrl = [];
     teamID && teamID.map(function (elm) {
       return teamUrl.push(API_URL + ('/team/' + elm.value));
     });
     return teamUrl;
   },
-  verification: async function verification(API_URL, otp, token, idUser) {
-    var result = await axios.get(API_URL + ('/users/verification_code/' + otp.toUpperCase()), {
-      headers: {
-        "api-token": token
-      }
-    }).then(async function (res) {
+  verification: async function verification(otp) {
+    var result = await _axiosConfig.httpClient.get('/users/verification_code/' + otp.toUpperCase()).then(async function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
     });
     return result;
   },
-  getUserInfo: async function getUserInfo(API_URL, idUser) {
-    var result = await axios.get(API_URL + ('/users/' + idUser)).then(async function (res) {
+  getUserInfo: async function getUserInfo(idUser) {
+    var result = await _axiosConfig.httpClient.get('/users/' + idUser).then(async function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
