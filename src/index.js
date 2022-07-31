@@ -43,8 +43,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     
     const getAverageGoal = async () => {
         const result = await httpClient.get('/team/average_team').then(res => {
-              res.data.data.sort((a, b) => b.moyenne_goal - a.moyenne_goal);
-              return res.data.data
+            return res.data.data.sort((a, b) => b.moyenne_goal - a.moyenne_goal);
+            //return res.data.data
           })
         .catch(err => {
           return err.response

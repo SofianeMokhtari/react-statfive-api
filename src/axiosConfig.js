@@ -1,4 +1,5 @@
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
     
 export const httpClient = axios.create({
     baseURL: "https://api.preprod.statfive.fr/api",
@@ -6,6 +7,7 @@ export const httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use(function (config) {
-    const token = AsyncStorage.getItem('token')
+    const token = AsyncStorage.getItem('token');
     config.headers['api-token'] =  token ? token : '';
+    return config
 });

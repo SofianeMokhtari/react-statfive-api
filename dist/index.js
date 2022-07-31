@@ -47,10 +47,10 @@ var register = function register(API_URL, email, firstname, lastname, password, 
 
 var getAverageGoal = async function getAverageGoal() {
   var result = await _axiosConfig.httpClient.get('/team/average_team').then(function (res) {
-    res.data.data.sort(function (a, b) {
+    return res.data.data.sort(function (a, b) {
       return b.moyenne_goal - a.moyenne_goal;
     });
-    return res.data.data;
+    //return res.data.data
   }).catch(function (err) {
     return err.response;
   });
