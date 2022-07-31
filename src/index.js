@@ -12,8 +12,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     const login = (API_URL, email, password) => {
         if(!isEmail(email)) {
             const result = axios.post(API_URL + "/users/login", { email, password })
-            .then(res => {
-                AsyncStorage.setItem('token', res.data.data.token)
+            .then(async (res) => {
+                await AsyncStorage.setItem('token', res.data.data.token)
                 return res.data
             }).catch((err) => {
                 return err.response
@@ -56,9 +56,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       login, 
       register,
       getAverageGoal,
-      getAllTeam: async function(API_URL) {
-        const result = await axios.get(
-          API_URL + `/team/all_team`).then(res => {
+      getAllTeam: async function() {
+        const result = await httpClient.get(`/team/all_team`).then(res => {
               let arrayObj = res.data.data
               arrayObj = arrayObj.map(item => {
                   return {
@@ -74,7 +73,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         });
         return result
       },
-      addVideo: async function(API_URL, mp4, teamOne, teamTwo, token) {
+      addVideo: async function(mp4, teamOne, teamTwo) {
         var bodyFormData = new FormData();
         bodyFormData.append('video', mp4);
         bodyFormData.append('team_one', teamOne);
@@ -82,11 +81,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     
         var headers = {
           'Content-Type': 'multipart/form-data',
-          "Access-Control-Allow-Origin": "*",
-          'api-token': token
+          "Access-Control-Allow-Origin": "*"
         }
-        const result = await axios.post(
-            API_URL + `/match`,
+        const result = await httpClient.post(`/match`,
             bodyFormData, { headers: headers })
           .then(res => {
             return res
@@ -96,9 +93,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           });
         return result
       },
-      createTeam: async function(API_URL, teamName, arrayTeam) {
-        const result = await axios.post(
-          API_URL + `/team/create_team`,
+      createTeam: async function(teamName, arrayTeam) {
+        const result = await httpClient.post(`/team/create_team`,
           [{name: teamName, player: arrayTeam }])
         .then(res => {
           return res
@@ -108,9 +104,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         });
         return result
       },
-      matchListHistoric: async function(API_URL) {
-        const result = await axios.get(
-          API_URL + `/match/all_match`).then(res => {
+      matchListHistoric: async function() {
+        const result = await httpClient.get(`/match/all_match`).then(res => {
             return res.data.data
           })
         .catch(err => {
@@ -118,9 +113,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         });
         return result
       },
-      updateProfil: async function(API_URL, idUser, description, post) {
-        const result = await axios.put(
-          API_URL + `/users/${idUser}`,
+      updateProfil: async function(idUser, description, post) {
+        const result = await httpClient.put(`/users/${idUser}`,
           { description, post})
         .then(res => {
             return res
@@ -130,9 +124,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         });
         return result
       },
-      getTeam: async function(API_URL) {
-        const result = await axios.get(
-          API_URL + `/team/all_team`)
+      getTeam: async function() {
+        const result = await httpClient.get(`/team/all_team`)
           .then(res => {
               return res.data.data
           })  
@@ -141,19 +134,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           });
         return result
       },
-      getMyTeam: async function(API_URL, teamID, userID) {
+      getMyTeam: async function(teamID) {
         let teamUrl = []
         teamID && teamID.map((elm) => teamUrl.push(API_URL + `/team/${elm.value}`))
         return teamUrl
       },
-      verification: async function(API_URL, otp, token, idUser) {
-        const result = await axios.get(
-          API_URL + `/users/verification_code/${otp.toUpperCase()}`,
-          {
-              headers: {
-              "api-token": token
-              }
-          })
+      verification: async function(otp) {
+        const result = await httpClient.get(`/users/verification_code/${otp.toUpperCase()}`)
           .then(async (res) => {
               return res
           })
@@ -162,8 +149,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           });
         return result
       },
-      getUserInfo: async function(API_URL, idUser) {
-        const result = await axios.get(API_URL + `/users/${idUser}`)
+      getUserInfo: async function(idUser) {
+        const result = await httpClient.get(`/users/${idUser}`)
         .then(async (res) => {
           return res
         })

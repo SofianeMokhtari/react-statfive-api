@@ -20,8 +20,8 @@ var isEmail = function isEmail(val) {
 
 var login = function login(API_URL, email, password) {
   if (!isEmail(email)) {
-    var result = axios.post(API_URL + "/users/login", { email: email, password: password }).then(function (res) {
-      _asyncStorage2.default.setItem('token', res.data.data.token);
+    var result = axios.post(API_URL + "/users/login", { email: email, password: password }).then(async function (res) {
+      await _asyncStorage2.default.setItem('token', res.data.data.token);
       return res.data;
     }).catch(function (err) {
       return err.response;

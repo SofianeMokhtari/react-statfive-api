@@ -9,5 +9,5 @@ export const httpClient = axios.create({
 httpClient.interceptors.request.use(async function (config) {
     const token = await AsyncStorage.getItem('token');
     config.headers['api-token'] =  token ? token : '';
-    return config
+    return config  
 });

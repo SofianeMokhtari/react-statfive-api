@@ -20,8 +20,8 @@ var httpClient = exports.httpClient = _axios2.default.create({
     // baseURL: process.env.APP_API_BASE_URL,
 });
 
-httpClient.interceptors.request.use(function (config) {
-    var token = _asyncStorage2.default.getItem('token');
+httpClient.interceptors.request.use(async function (config) {
+    var token = await _asyncStorage2.default.getItem('token');
     config.headers['api-token'] = token ? token : '';
     return config;
 });
