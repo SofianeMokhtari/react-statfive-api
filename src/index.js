@@ -160,8 +160,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         return result
       },
       statMatchById: async function(idMatch) {
-        const result = await httpClient.get(`/match/stat_match_by_id/${id}`)
+        const result = await httpClient.get(`/match/stat_match_by_id/${idMatch}`)
         .then(async (res) => {
+          return res
+        }).catch(err => {
+          return err.response
+        })
+        return result
+      }?
+      getAllUser: async function() {
+        const result = await httpClient.get(`/users/all_user`)
+        .then((res) => {
           return res
         }).catch(err => {
           return err.response
