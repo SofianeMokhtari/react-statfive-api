@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
-var _axiosConfig = require('./axiosConfig');
+var _axiosConfig = require("./axiosConfig");
 
-var _asyncStorage = require('@react-native-async-storage/async-storage');
+var _asyncStorage = require("@react-native-async-storage/async-storage");
 
 var _asyncStorage2 = _interopRequireDefault(_asyncStorage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var axios = require('axios');
+var axios = require("axios");
 
 
 var isEmail = function isEmail(val) {
@@ -21,10 +21,10 @@ var isEmail = function isEmail(val) {
 var login = function login(API_URL, email, password) {
   if (!isEmail(email)) {
     var result = axios.post(API_URL + "/users/login", { email: email, password: password }).then(async function (res) {
-      await _asyncStorage2.default.setItem('token', res.data.data.token);
-      return res.data;
+      await _asyncStorage2.default.setItem("token", res.data.data.token);
+      return res;
     }).catch(function (err) {
-      return err.response;
+      return err;
     });
     return result;
   }
@@ -46,7 +46,7 @@ var register = function register(API_URL, email, firstname, lastname, password, 
 };
 
 var getAverageGoal = async function getAverageGoal() {
-  var result = await _axiosConfig.httpClient.get('/team/average_team').then(function (res) {
+  var result = await _axiosConfig.httpClient.get("/team/average_team").then(function (res) {
     return res.data.data.sort(function (a, b) {
       return b.moyenne_goal - a.moyenne_goal;
     });
@@ -62,7 +62,7 @@ module.exports = {
   register: register,
   getAverageGoal: getAverageGoal,
   getAllTeam: async function getAllTeam() {
-    var result = await _axiosConfig.httpClient.get('/team/all_team').then(function (res) {
+    var result = await _axiosConfig.httpClient.get("/team/all_team").then(function (res) {
       var arrayObj = res.data.data;
       arrayObj = arrayObj.map(function (item) {
         return {
@@ -79,15 +79,15 @@ module.exports = {
   },
   addVideo: async function addVideo(mp4, teamOne, teamTwo) {
     var bodyFormData = new FormData();
-    bodyFormData.append('video', mp4);
-    bodyFormData.append('team_one', teamOne);
-    bodyFormData.append('team_two', teamTwo);
+    bodyFormData.append("video", mp4);
+    bodyFormData.append("team_one", teamOne);
+    bodyFormData.append("team_two", teamTwo);
 
     var headers = {
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*"
     };
-    var result = await _axiosConfig.httpClient.post('/match', bodyFormData, { headers: headers }).then(function (res) {
+    var result = await _axiosConfig.httpClient.post("/match", bodyFormData, { headers: headers }).then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
@@ -95,7 +95,7 @@ module.exports = {
     return result;
   },
   createTeam: async function createTeam(teamName, arrayTeam) {
-    var result = await _axiosConfig.httpClient.post('/team/create_team', [{ name: teamName, player: arrayTeam }]).then(function (res) {
+    var result = await _axiosConfig.httpClient.post("/team/create_team", [{ name: teamName, player: arrayTeam }]).then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
@@ -103,7 +103,7 @@ module.exports = {
     return result;
   },
   matchListHistoric: async function matchListHistoric() {
-    var result = await _axiosConfig.httpClient.get('/match/all_match').then(function (res) {
+    var result = await _axiosConfig.httpClient.get("/match/all_match").then(function (res) {
       return res.data.data;
     }).catch(function (err) {
       return err.response;
@@ -111,7 +111,7 @@ module.exports = {
     return result;
   },
   updateProfil: async function updateProfil(idUser, description, post) {
-    var result = await _axiosConfig.httpClient.put('/users/' + idUser, { description: description, post: post }).then(function (res) {
+    var result = await _axiosConfig.httpClient.put("/users/" + idUser, { description: description, post: post }).then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
@@ -119,7 +119,7 @@ module.exports = {
     return result;
   },
   getTeam: async function getTeam() {
-    var result = await _axiosConfig.httpClient.get('/team/all_team').then(function (res) {
+    var result = await _axiosConfig.httpClient.get("/team/all_team").then(function (res) {
       return res.data.data;
     }).catch(function (err) {
       return err.response;
@@ -129,12 +129,12 @@ module.exports = {
   getMyTeam: async function getMyTeam(teamID) {
     var teamUrl = [];
     teamID && teamID.map(function (elm) {
-      return teamUrl.push("https://api.preprod.statfive.fr/api" + ('/team/' + elm.value));
+      return teamUrl.push("https://api.preprod.statfive.fr/api" + ("/team/" + elm.value));
     });
     return teamUrl;
   },
   verification: async function verification(otp) {
-    var result = await _axiosConfig.httpClient.get('/users/verification_code/' + otp.toUpperCase()).then(async function (res) {
+    var result = await _axiosConfig.httpClient.get("/users/verification_code/" + otp.toUpperCase()).then(async function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
@@ -142,7 +142,7 @@ module.exports = {
     return result;
   },
   getUserInfo: async function getUserInfo(idUser) {
-    var result = await _axiosConfig.httpClient.get('/users/' + idUser).then(async function (res) {
+    var result = await _axiosConfig.httpClient.get("/users/" + idUser).then(async function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
@@ -150,7 +150,7 @@ module.exports = {
     return result;
   },
   statMatchById: async function statMatchById(idMatch) {
-    var result = await _axiosConfig.httpClient.get('/match/stat_match_by_id/' + idMatch).then(async function (res) {
+    var result = await _axiosConfig.httpClient.get("/match/stat_match_by_id/" + idMatch).then(async function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
@@ -158,7 +158,7 @@ module.exports = {
     return result;
   },
   getAllUser: async function getAllUser() {
-    var result = await _axiosConfig.httpClient.get('/users/all_user').then(function (res) {
+    var result = await _axiosConfig.httpClient.get("/users/all_user").then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
