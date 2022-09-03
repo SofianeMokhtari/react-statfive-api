@@ -22,7 +22,7 @@ var login = function login(API_URL, email, password) {
   if (!isEmail(email)) {
     var result = axios.post(API_URL + "/users/login", { email: email, password: password }).then(async function (res) {
       await _asyncStorage2.default.setItem("token", res.data.data.token);
-      await _asyncStorage2.default.setItem("userInfo", res.data.data);
+      await _asyncStorage2.default.setItem("userInfo", JSON.stringify(res.data.data));
       return res.data;
     }).catch(function (err) {
       return err.response;
