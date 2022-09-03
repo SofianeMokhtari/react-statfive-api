@@ -16,6 +16,7 @@ const login = (API_URL, email, password) => {
       .post(API_URL + "/users/login", { email, password })
       .then(async (res) => {
         await AsyncStorage.setItem("token", res.data.data.token);
+        await AsyncStorage.setItem("userInfo", res.data.data);
         return res.data;
       })
       .catch((err) => {
