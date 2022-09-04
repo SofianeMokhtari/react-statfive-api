@@ -210,5 +210,16 @@ module.exports = {
         return err.response
       });
     return result
+  },
+  changeMyPassword: async function (code, password) {
+    const result = await httpClient
+      .post('/users/confirm-reset-password', {code, password})
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response
+      });
+    return result
   }
 };

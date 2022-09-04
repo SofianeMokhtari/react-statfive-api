@@ -173,5 +173,13 @@ module.exports = {
       return err.response;
     });
     return result;
+  },
+  changeMyPassword: async function changeMyPassword(code, password) {
+    var result = await _axiosConfig.httpClient.post('/users/confirm-reset-password', { code: code, password: password }).then(function (res) {
+      return res;
+    }).catch(function (err) {
+      return err.response;
+    });
+    return result;
   }
 };
