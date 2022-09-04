@@ -165,5 +165,13 @@ module.exports = {
       return err.response;
     });
     return result;
+  },
+  getNewPassword: async function getNewPassword() {
+    var result = await _axiosConfig.httpClient.post('/users/mail-reset-password').then(function (res) {
+      return res;
+    }).catch(function (err) {
+      return err.response;
+    });
+    return result;
   }
 };

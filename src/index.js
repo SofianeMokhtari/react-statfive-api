@@ -200,4 +200,15 @@ module.exports = {
       });
     return result;
   },
+  getNewPassword: async function () {
+    const result = await httpClient
+      .post('/users/mail-reset-password')
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response
+      });
+    return result
+  }
 };
