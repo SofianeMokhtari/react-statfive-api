@@ -200,9 +200,9 @@ module.exports = {
       });
     return result;
   },
-  getNewPassword: async function () {
+  getNewPassword: async function (mail) {
     const result = await httpClient
-      .post('/users/mail-reset-password')
+      .post('/users/mail-reset-password', {mail})
       .then((res) => {
         return res;
       })
