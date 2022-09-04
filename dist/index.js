@@ -166,8 +166,8 @@ module.exports = {
     });
     return result;
   },
-  getNewPassword: async function getNewPassword() {
-    var result = await _axiosConfig.httpClient.post('/users/mail-reset-password').then(function (res) {
+  getNewPassword: async function getNewPassword(mail) {
+    var result = await _axiosConfig.httpClient.post('/users/mail-reset-password', { "email": mail }).then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;

@@ -202,7 +202,7 @@ module.exports = {
   },
   getNewPassword: async function (mail) {
     const result = await httpClient
-      .post('/users/mail-reset-password', {mail})
+      .post('/users/mail-reset-password', {"email": mail})
       .then((res) => {
         return res;
       })
