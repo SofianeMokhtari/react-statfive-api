@@ -130,7 +130,7 @@ module.exports = {
   getMyTeam: async function getMyTeam(teamID) {
     var teamUrl = [];
     teamID && teamID.map(function (elm) {
-      return teamUrl.push("https://api.preprod.statfive.fr/api" + ("/team/" + elm.value));
+      return teamUrl.push(process.env.API_URL + ("/team/" + elm.value));
     });
     return teamUrl;
   },

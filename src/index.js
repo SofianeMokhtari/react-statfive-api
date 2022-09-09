@@ -151,7 +151,7 @@ module.exports = {
     teamID &&
       teamID.map((elm) =>
         teamUrl.push(
-          "https://api.preprod.statfive.fr/api" + `/team/${elm.value}`
+          process.env.API_URL + `/team/${elm.value}`
         )
       );
     return teamUrl;
