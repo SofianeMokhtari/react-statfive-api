@@ -146,15 +146,16 @@ module.exports = {
       });
     return result;
   },
-  getMyTeam: async function (teamID) {
-    let teamUrl = [];
-    teamID &&
-      teamID.map((elm) =>
-        teamUrl.push(
-          process.env.API_URL + `/team/${elm.value}`
-        )
-      );
-    return teamUrl;
+  getMyTeam: async function () {
+    const result = await httpClient
+      .get(`/team`)
+      .then((res) => {
+        return res.data.data;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+    return result;
   },
   verification: async function (otp) {
     const result = await httpClient
