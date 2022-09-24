@@ -221,5 +221,13 @@ module.exports = {
         return err.response
       });
     return result
+  },
+  getMe: async function() {
+    const result = await httpClient.get('/users/me').then((res) => {
+      return res;
+    }).catch((err) => {
+      return err.response
+    })
+    return result
   }
 };
