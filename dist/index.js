@@ -127,12 +127,13 @@ module.exports = {
     });
     return result;
   },
-  getMyTeam: async function getMyTeam(teamID) {
-    var teamUrl = [];
-    teamID && teamID.map(function (elm) {
-      return teamUrl.push(process.env.API_URL + ("/team/" + elm.value));
+  getMyTeam: async function getMyTeam() {
+    var result = await _axiosConfig.httpClient.get("/team").then(function (res) {
+      return res.data.data;
+    }).catch(function (err) {
+      return err.response;
     });
-    return teamUrl;
+    return result;
   },
   verification: async function verification(otp) {
     var result = await _axiosConfig.httpClient.get("/users/verification_code/" + otp.toUpperCase()).then(async function (res) {
@@ -176,6 +177,14 @@ module.exports = {
   },
   changeMyPassword: async function changeMyPassword(code, password) {
     var result = await _axiosConfig.httpClient.post('/users/confirm-reset-password', { code: code, password: password }).then(function (res) {
+      return res;
+    }).catch(function (err) {
+      return err.response;
+    });
+    return result;
+  },
+  getMe: async function getMe() {
+    var result = await _axiosConfig.httpClient.get('/users/me').then(function (res) {
       return res;
     }).catch(function (err) {
       return err.response;
