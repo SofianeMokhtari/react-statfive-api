@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     
 export const httpClient = axios.create({
     //baseURL: "https://api.preprod.statfive.fr/api",
-    baseURL: process.env.API_URL,
+    baseURL: process.env.API_URL ? process.env.API_URL : "https://api.preprod.statfive.fr/api",
 });
 
 httpClient.interceptors.request.use(async function (config) {
