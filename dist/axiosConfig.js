@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var httpClient = exports.httpClient = _axios2.default.create({
     //baseURL: "https://api.preprod.statfive.fr/api",
-    baseURL: process.env.API_URL ? process.env.API_URL : "https://api.preprod.statfive.fr/api"
+    baseURL: process.env.API_URL ? process.env.API_URL : "https://api.statfive.fr/api"
 });
 
 httpClient.interceptors.request.use(async function (config) {
